@@ -1,0 +1,20 @@
+.Temperature {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+}
+.Temperature img {
+  width: 90%;
+}
+.Temperature h2 {
+  display: flex;
+  align-items: center;
+}
+.Temperature h2 span {
+  font-size: 5rem;
+  margin: 0 10px;
+  font-weight: 500;
+}
+.Temperature h2 a {
+  text-decoration: none;
+}
