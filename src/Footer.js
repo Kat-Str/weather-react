@@ -7,7 +7,7 @@ export default function Footer() {
         className="github-link"
         target="_blank"
         rel="noreferrer"
-        href="https://github.com/Kat-Str/weather-app"
+        href="https://github.com/Kat-Str/weather-react"
       >
         Open-source code
       </a>
