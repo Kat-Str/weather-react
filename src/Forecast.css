@@ -2,3 +2,11 @@
   width: 100px;
   height: 100px;
 }
+
+.Forecast .forecast-box {
+  height: 100px;
+  transition: all 0.3s ease-in-out;
+}
+.Forecast .forecast-box:hover {
+  transform: scale(1.2);
+}

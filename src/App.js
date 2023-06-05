@@ -1,12 +1,10 @@
 import React from "react";
 import SearchForm from "./SearchForm.js";
-import DailyWeather from "./DailyWeather";
 import Forecast from "./Forecast";
 import Footer from "./Footer";
+import Weather from "./Weather.js";
 import "./styles.css";
-import "./DailyWeather.css";
-import "./WeatherData.css";
-import "./Temperature.css";
+
 import "./SearchForm.css";
 import "./Footer.css";
 
@@ -15,7 +13,7 @@ export default function App() {
     <div className="App">
       <div className="container">
         <SearchForm />
-        <DailyWeather />
+        <Weather />
         <Forecast />
         <Footer />
       </div>

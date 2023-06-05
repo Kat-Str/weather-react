@@ -1,0 +1,22 @@
+.Weather ul {
+  list-style-type: none;
+  text-align: left;
+  padding: 0;
+}
+.Weather li {
+  margin: 5px 0;
+}
+.Weather h1,
+h2 {
+  text-align: left;
+  margin: 10px 0;
+  font-weight: 500;
+}
+.Weather .main-weather-info {
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+.Weather .temperature {
+  font-size: 4rem;
+}
