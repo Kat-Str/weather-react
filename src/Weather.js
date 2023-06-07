@@ -1,10 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Weather.css";
 import axios from "axios";
 
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState("");
   let [city, setCity] = useState(props.defaultCity);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  function fetchData() {
+    let apiKey = "73a00877081bd43422bdee0f3022beb5";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    axios
+      .get(apiUrl)
+      .then(handleResponse)
+      .catch((error) => {
+        setWeatherData({ submitted: false });
+      });
+  }
 
   function handleResponse(response) {
     console.log(response.data);
@@ -22,14 +37,7 @@ export default function Weather(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    let apiKey = "73a00877081bd43422bdee0f3022beb5";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-    axios
-      .get(apiUrl)
-      .then(handleResponse)
-      .catch((error) => {
-        setWeatherData({ submitted: false });
-      });
+    fetchData();
   }
 
   function updateCity(event) {
@@ -56,7 +64,7 @@ export default function Weather(props) {
           style={{
             display: "flex",
             justifyContent: "flex-start",
-            margin: "20px 0 80px",
+            margin: "0 0 60px",
           }}
         >
           <div className="main-weather-info" style={{ flex: "50%" }}>
