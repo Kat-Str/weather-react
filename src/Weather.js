@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Weather.css";
 import axios from "axios";
+import { MagnifyingGlass } from "react-loader-spinner";
 
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState("");
   let [city, setCity] = useState(props.defaultCity);
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const [isLoading, setIsLoading] = useState(false);
 
   function fetchData() {
     let apiKey = "73a00877081bd43422bdee0f3022beb5";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+    setIsLoading(true);
+
     axios
       .get(apiUrl)
       .then(handleResponse)
@@ -33,6 +34,7 @@ export default function Weather(props) {
       date: "today",
       icon: "nothing here",
     });
+    setIsLoading(false);
   }
 
   function handleSubmit(event) {
@@ -95,6 +97,18 @@ export default function Weather(props) {
             </ul>
           </div>
         </div>
+      )}
+      {!weatherData.submitted && isLoading && (
+        <MagnifyingGlass
+          visible={true}
+          height="180"
+          width="180"
+          ariaLabel="MagnifyingGlass-loading"
+          wrapperStyle={{}}
+          wrapperClass="MagnifyingGlass-wrapper"
+          glassColor="#c0efff"
+          color="#c87d4c "
+        />
       )}
     </div>
   );
