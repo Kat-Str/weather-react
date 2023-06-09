@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Weather.css";
 import axios from "axios";
 import { MagnifyingGlass } from "react-loader-spinner";
+import FormattedDate from "./FormattedDate";
 
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState("");
@@ -31,7 +32,7 @@ export default function Weather(props) {
       description: response.data.weather[0].description,
       wind: response.data.wind.speed,
       humidity: response.data.main.humidity,
-      date: "today",
+      date: new Date(response.data.dt * 1000),
       icon: "nothing here",
     });
     setIsLoading(false);
@@ -90,7 +91,9 @@ export default function Weather(props) {
           </div>
           <div style={{ flex: "50%", marginLeft: "80px" }}>
             <h1 style={{ fontSize: "2.8rem" }}>{weatherData.displayedCity}</h1>
-            <h2 style={{ fontSize: "1.5rem" }}>Sunday, 18:45</h2>
+            <h2 style={{ fontSize: "1.5rem" }}>
+              <FormattedDate date={weatherData.date} />
+            </h2>
             <ul>
               <li>Wind speed: {weatherData.wind}km/h</li>
               <li>Humidity: {weatherData.humidity}%</li>

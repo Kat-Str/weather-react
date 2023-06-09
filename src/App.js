@@ -1,5 +1,5 @@
 import React from "react";
-import Forecast from "./Forecast";
+
 import Footer from "./Footer";
 import Weather from "./Weather.js";
 import "./styles.css";
@@ -12,7 +12,7 @@ export default function App() {
     <div className="App">
       <div className="container">
         <Weather defaultCity="Lublin" />
-        <Forecast />
+
         <Footer />
       </div>
     </div>
