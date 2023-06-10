@@ -4,6 +4,7 @@ import axios from "axios";
 import { MagnifyingGlass } from "react-loader-spinner";
 import FormattedDate from "./FormattedDate";
 import Icons from "./Icons";
+import Temperature from "./Temperature";
 
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState("");
@@ -85,7 +86,13 @@ export default function Weather(props) {
               <div style={{ margin: "15px" }}>
                 <Icons icon={weatherData.icon} />
               </div>
-              <div className="temperature">{weatherData.temperature}°</div>
+              <div className="temperature">
+                {" "}
+                <Temperature
+                  temperature={weatherData.temperature}
+                  unit="celcius"
+                />
+              </div>
             </div>
             <div
               style={{
@@ -104,7 +111,7 @@ export default function Weather(props) {
               <FormattedDate date={weatherData.date} />
             </h2>
             <ul>
-              <li>Wind speed: {weatherData.wind}km/h</li>
+              <li>Wind speed: {weatherData.wind} km/h</li>
               <li>Humidity: {weatherData.humidity}%</li>
             </ul>
           </div>
