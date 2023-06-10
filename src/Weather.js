@@ -3,6 +3,7 @@ import "./Weather.css";
 import axios from "axios";
 import { MagnifyingGlass } from "react-loader-spinner";
 import FormattedDate from "./FormattedDate";
+import Icons from "./Icons";
 
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState("");
@@ -33,7 +34,7 @@ export default function Weather(props) {
       wind: response.data.wind.speed,
       humidity: response.data.main.humidity,
       date: new Date(response.data.dt * 1000),
-      icon: "nothing here",
+      icon: response.data.weather[0].icon,
     });
     setIsLoading(false);
   }
@@ -70,24 +71,32 @@ export default function Weather(props) {
             margin: "0 0 60px",
           }}
         >
-          <div className="main-weather-info" style={{ flex: "50%" }}>
-            <div style={{ marginLeft: "30px" }}>
-              <img
-                style={{ width: "9rem", transform: "scale(1.2)" }}
-                src="https://openweathermap.org/img/wn/04d@2x.png"
-                alt="Weather icon"
-              />
-              <div
-                style={{
-                  textAlign: "center",
-                  fontSize: "1.3rem",
-                  textTransform: "capitalize",
-                }}
-              >
-                {weatherData.description}
+          <div
+            className="left-side"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "2",
+              placeItems: "center",
+              flex: "50%",
+              alignItems: "flex-end",
+            }}
+          >
+            <div className="main-weather-info" style={{ flex: "50%" }}>
+              <div style={{ margin: "15px" }}>
+                <Icons icon={weatherData.icon} />
               </div>
+              <div className="temperature">{weatherData.temperature}°</div>
             </div>
-            <div className="temperature">{weatherData.temperature}°</div>
+            <div
+              style={{
+                textAlign: "center",
+                fontSize: "1.3rem",
+                textTransform: "capitalize",
+                alignSelf: "flex-start",
+              }}
+            >
+              {weatherData.description}
+            </div>
           </div>
           <div style={{ flex: "50%", marginLeft: "80px" }}>
             <h1 style={{ fontSize: "2.8rem" }}>{weatherData.displayedCity}</h1>
