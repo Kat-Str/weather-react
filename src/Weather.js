@@ -5,6 +5,7 @@ import { MagnifyingGlass } from "react-loader-spinner";
 import FormattedDate from "./FormattedDate";
 import Icons from "./Icons";
 import Temperature from "./Temperature";
+import Forecast from "./Forecast";
 
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState("");
@@ -64,57 +65,62 @@ export default function Weather(props) {
         </form>
       </div>
       {weatherData.submitted && (
-        <div
-          className="Weather"
-          style={{
-            display: "flex",
-            justifyContent: "flex-start",
-            margin: "0 0 60px",
-          }}
-        >
+        <div>
           <div
-            className="left-side"
+            className="Weather"
             style={{
-              display: "grid",
-              gridTemplateColumns: "2",
-              placeItems: "center",
-              flex: "50%",
-              alignItems: "flex-end",
+              display: "flex",
+              justifyContent: "flex-start",
+              margin: "30px 0 60px",
             }}
           >
-            <div className="main-weather-info" style={{ flex: "50%" }}>
-              <div style={{ margin: "15px" }}>
-                <Icons icon={weatherData.icon} />
-              </div>
-              <div className="temperature">
-                {" "}
-                <Temperature
-                  temperature={weatherData.temperature}
-                  unit="celcius"
-                />
-              </div>
-            </div>
             <div
+              className="left-side"
               style={{
-                textAlign: "center",
-                fontSize: "1.3rem",
-                textTransform: "capitalize",
-                alignSelf: "flex-start",
+                display: "grid",
+                gridTemplateColumns: "2",
+                placeItems: "center",
+                flex: "50%",
+                alignItems: "flex-end",
               }}
             >
-              {weatherData.description}
+              <div className="main-weather-info" style={{ flex: "50%" }}>
+                <div style={{ margin: "15px" }}>
+                  <Icons icon={weatherData.icon} size="100" />
+                </div>
+                <div className="temperature">
+                  {" "}
+                  <Temperature
+                    temperature={weatherData.temperature}
+                    unit="celcius"
+                  />
+                </div>
+              </div>
+              <div
+                style={{
+                  textAlign: "center",
+                  fontSize: "1.3rem",
+                  textTransform: "capitalize",
+                  alignSelf: "flex-start",
+                }}
+              >
+                {weatherData.description}
+              </div>
+            </div>
+            <div style={{ flex: "50%", marginLeft: "80px" }}>
+              <h1 style={{ fontSize: "2.8rem" }}>
+                {weatherData.displayedCity}
+              </h1>
+              <h2 style={{ fontSize: "1.5rem" }}>
+                <FormattedDate date={weatherData.date} />
+              </h2>
+              <ul>
+                <li>Wind speed: {weatherData.wind} km/h</li>
+                <li>Humidity: {weatherData.humidity}%</li>
+              </ul>
             </div>
           </div>
-          <div style={{ flex: "50%", marginLeft: "80px" }}>
-            <h1 style={{ fontSize: "2.8rem" }}>{weatherData.displayedCity}</h1>
-            <h2 style={{ fontSize: "1.5rem" }}>
-              <FormattedDate date={weatherData.date} />
-            </h2>
-            <ul>
-              <li>Wind speed: {weatherData.wind} km/h</li>
-              <li>Humidity: {weatherData.humidity}%</li>
-            </ul>
-          </div>
+          <Forecast />
         </div>
       )}
       {!weatherData.submitted && isLoading && (

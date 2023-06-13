@@ -1,11 +1,15 @@
 import React from "react";
 import "./Forecast.css";
+import Icons from "./Icons";
+
 export default function Forecast() {
   const DisplayNextDay = () => {
     return (
       <div className="Forecast">
         <div className="forecast-box">
-          <h5 style={{ display: "inline-block", margin: "0" }}>Next Day</h5>
+          <h5 style={{ display: "inline-block", marginBottom: "20px" }}>
+            Next Day
+          </h5>
           <div
             style={{
               display: "flex",
@@ -13,18 +17,12 @@ export default function Forecast() {
               alignItems: "center",
             }}
           >
-            <img
-              id="weather-icon"
-              src="https://openweathermap.org/img/wn/04d@2x.png"
-              alt="Weather icon"
-              width="50px"
-              height="50px"
-            />
-            <p className="temperature">
-              <span className="max-day-temp">{Math.round(18)}° </span>
-              <span className="min-day-temp">{Math.round(9)}°</span>
-            </p>
+            <Icons icon="13d" size="50" />
           </div>
+          <p className="temperature">
+            <span>{Math.round(18)}° </span>
+            <span style={{ opacity: "0.7" }}>{Math.round(9)}°</span>
+          </p>
         </div>
       </div>
     );
