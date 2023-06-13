@@ -37,6 +37,7 @@ export default function Weather(props) {
       humidity: response.data.main.humidity,
       date: new Date(response.data.dt * 1000),
       icon: response.data.weather[0].icon,
+      coords: response.data.coord,
     });
     setIsLoading(false);
   }
@@ -71,7 +72,7 @@ export default function Weather(props) {
             style={{
               display: "flex",
               justifyContent: "flex-start",
-              margin: "30px 0 60px",
+              margin: "0 0 40px",
             }}
           >
             <div
@@ -86,7 +87,7 @@ export default function Weather(props) {
             >
               <div className="main-weather-info" style={{ flex: "50%" }}>
                 <div style={{ margin: "15px" }}>
-                  <Icons icon={weatherData.icon} size="100" />
+                  <Icons icon={weatherData.icon} size={100} />
                 </div>
                 <div className="temperature">
                   {" "}
@@ -120,7 +121,7 @@ export default function Weather(props) {
               </ul>
             </div>
           </div>
-          <Forecast />
+          <Forecast coords={weatherData.coords} />
         </div>
       )}
       {!weatherData.submitted && isLoading && (

@@ -2,8 +2,9 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <div className="Footer">
+    <div style={{ marginTop: "90px", fontSize: "0.7rem" }}>
       <a
+        style={{ color: "#000" }}
         className="github-link"
         target="_blank"
         rel="noreferrer"

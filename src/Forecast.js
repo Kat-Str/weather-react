@@ -1,8 +1,19 @@
 import React from "react";
 import "./Forecast.css";
 import Icons from "./Icons";
+import axios from "axios";
 
-export default function Forecast() {
+export default function Forecast(props) {
+  let apiKey = "f5029b784306910c19746e40c14d6cd3";
+  let lat = props.coords.lat;
+  let lon = props.coords.lon;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+
+  function handleResponse(response) {
+    console.log(response.data);
+  }
+
+  axios.get(apiUrl).then(handleResponse);
   const DisplayNextDay = () => {
     return (
       <div className="Forecast">
@@ -17,7 +28,7 @@ export default function Forecast() {
               alignItems: "center",
             }}
           >
-            <Icons icon="13d" size="50" />
+            <Icons icon="13d" size={50} />
           </div>
           <p className="temperature">
             <span>{Math.round(18)}° </span>

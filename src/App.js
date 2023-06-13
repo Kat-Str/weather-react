@@ -5,7 +5,6 @@ import Weather from "./Weather.js";
 import "./styles.css";
 
 import "./SearchForm.css";
-import "./Footer.css";
 
 export default function App() {
   return (
