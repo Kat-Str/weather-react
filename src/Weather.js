@@ -10,20 +10,12 @@ import Forecast from "./Forecast";
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState("");
   let [city, setCity] = useState(props.defaultCity);
-  const [isLoading, setIsLoading] = useState(false);
 
   function fetchData() {
     let apiKey = "73a00877081bd43422bdee0f3022beb5";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
-    setIsLoading(true);
-
-    axios
-      .get(apiUrl)
-      .then(handleResponse)
-      .catch((error) => {
-        setWeatherData({ submitted: false });
-      });
+    axios.get(apiUrl).then(handleResponse);
   }
 
   function handleResponse(response) {
@@ -39,7 +31,6 @@ export default function Weather(props) {
       icon: response.data.weather[0].icon,
       coords: response.data.coord,
     });
-    setIsLoading(false);
   }
 
   function handleSubmit(event) {
@@ -52,20 +43,21 @@ export default function Weather(props) {
     setCity(event.target.value);
   }
 
-  return (
-    <div>
-      <div className="SearchForm">
-        <form id="form-city" onSubmit={handleSubmit}>
-          <input type="submit" id="search-button" value="search" />
-          <input
-            type="search"
-            id="search-engine"
-            placeholder="Enter the city"
-            onChange={updateCity}
-          />
-        </form>
-      </div>
-      {weatherData.submitted && (
+  if (weatherData.submitted) {
+    return (
+      <div>
+        <div className="SearchForm">
+          <form id="form-city" onSubmit={handleSubmit}>
+            <input type="submit" id="search-button" value="search" />
+            <input
+              type="search"
+              id="search-engine"
+              placeholder="Enter the city"
+              onChange={updateCity}
+            />
+          </form>
+        </div>
+
         <div>
           <div
             className="Weather"
@@ -123,19 +115,21 @@ export default function Weather(props) {
           </div>
           <Forecast coords={weatherData.coords} />
         </div>
-      )}
-      {!weatherData.submitted && isLoading && (
-        <MagnifyingGlass
-          visible={true}
-          height="180"
-          width="180"
-          ariaLabel="MagnifyingGlass-loading"
-          wrapperStyle={{}}
-          wrapperClass="MagnifyingGlass-wrapper"
-          glassColor="#c0efff"
-          color="#c87d4c "
-        />
-      )}
-    </div>
-  );
+      </div>
+    );
+  } else {
+    fetchData();
+    return (
+      <MagnifyingGlass
+        visible={true}
+        height="180"
+        width="180"
+        ariaLabel="MagnifyingGlass-loading"
+        wrapperStyle={{}}
+        wrapperClass="MagnifyingGlass-wrapper"
+        glassColor="#c0efff"
+        color="#c87d4c "
+      />
+    );
+  }
 }
