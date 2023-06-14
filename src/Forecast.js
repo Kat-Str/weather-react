@@ -15,9 +15,20 @@ export default function Forecast(props) {
 
   if (loaded) {
     return (
-      <div>
-        <Day data={forecast[1]} />
-      </div>
+      <span style={{ display: "flex", justifyContent: "space-evenly" }}>
+        {forecast.map(function (forecast, index) {
+          if (index < 5) {
+            return (
+              <span
+                style={{ display: "flex", justifyContent: "space-evenly" }}
+                key={index}
+              >
+                <Day data={forecast} />
+              </span>
+            );
+          }
+        })}
+      </span>
     );
   } else {
     let apiKey = "f5029b784306910c19746e40c14d6cd3";
